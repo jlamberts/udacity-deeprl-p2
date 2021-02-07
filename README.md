@@ -6,11 +6,10 @@ This environment puts agents in control of double-jointed arms, with the goal of
 
 To achieve this goal, the agent takes action by sending the environment a vector of 4 numbers in the range [-1,1].  These numbers correspond to torque which is applied to the two joints of the arm. State information is given to the agent as a vector of length 33; this state information contains data about each arm segment's position, rotation, velocity, and angular velocity.
 
-The environment is considered "solved" when the average 100-episode rolling score is >= +30.  Specifically, since I am solving the 20-agent version of the environment, the average is taken across all agents as well as the 100 episode rolling window.
+The environment is considered "solved" when the average score across all agents is >= +30.
+
 ## My Solution
-To solve the environment, I implemented three variations on Deep Q Networks: "vanilla" DQN, Double DQN, and Dueling DQN.
-I also implemented a basic experiment runner and serialization format to more easily run the different setups and
-compare results.  For more details on my findings, see the writeup in [report.ipynb](report.ipynb)
+To solve the environment, I implemented an Advantage Actor Critic model (A2C) with n-step rollout.  For more details on my findings, see the writeup in [report.ipynb](report.ipynb).
 
 ## Getting Started
 
@@ -36,24 +35,9 @@ your operating system.  Links for each operating system can be found below:
 
 After downloading, use 7zip or another archive tool to extract the environment file into the root project directory.
 By default, the code is set up to look for the Linux version of the environment, so you will need to modify the
-UNITY_ENV_PATH variable in `run_experiments.py` or `run_agent.py` to point to your new version.
+UNITY_ENV_PATH variable in `train_agent.py` or `run_agent.py` to point to your new version.
 
-## Instructions
-The experiment runner, `navigation.experiment.run_and_save_experiment`, accepts dictionaries of keyword args which
-modify behavior at the experiment level (number of epochs, epsilon decay rate, etc.) as well as behavior on the agent
-level (type of network used, size of hidden layer, double DQN vs "vanilla" Q-value calculations).  By default, the file
-`run_experiments.py` is configured to run 5 experiments and write the results to the `experiments` folder.  You can modify
-the `EXPERIMENT_SETUPS` list at the top of the file to adjust the experiment setups if you'd like to compare
-different setups.  
+## Running The Code
+The `train_agent.py` python file at the project root contains the logic necessary to train both the actor and the critic networks.  You can run it with the command `python train_agent.py`.  Note that you will need to update the UDACITY_ENV_PATH variable to point to your version of the Unity environment.  By changing the other variables in ALL_CAPS at the top of the file, you can modify various hyperparameters used by the agent during training.  After training, this script will store the final actor and critic weights in the `model_weights` directory. It will also store the average score per-episode as a csv in the `scores` directory.
 
-To run the default experiments, navigate to the root of the project and run the command `python run_experiments.py`.
-If there is data in an experiment's folder already, the program will ask you whether you want to overwrite the data or
-skip the experiment.  If neither option is chosen, the program will terminate to avoid overwriting the existing
-experiment.
-
-The experiments directory contains one folder per experiment run.  Inside each folder are two files: `experiment.json`
-and `model_weights.pt`.  `experiment.json` contains experiment metadata, including the parameters used for the experiment,
-runtime, and training errors.  `model_weights.pt` contains the final trained weights at the end of the experiment which
-can be loaded into a PyTorch model using the command `my_model.load_state_dict(torch.load(weights_path))`.  Alternatively,
-you can load the model from the experiment directory without first instantiating a model using the 
-`navigation.experiment.load_experiment_model(experiment_folder_path)` function.
+The `run_agent.py` python file at the project root contains the logic necessary to run the network in the environment.  You can run it with the command `python run_agent.py`. Once again, you will need to update the UDACITY_ENV_PATH variable to point to your version of the Unity environment before running this script.  By modifying the `TRAIN_MODE` variable to False, you can watch the agent as it runs.
