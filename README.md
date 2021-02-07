@@ -41,3 +41,9 @@ UNITY_ENV_PATH variable in `train_agent.py` or `run_agent.py` to point to your n
 The `train_agent.py` python file at the project root contains the logic necessary to train both the actor and the critic networks.  You can run it with the command `python train_agent.py`.  Note that you will need to update the UDACITY_ENV_PATH variable to point to your version of the Unity environment.  By changing the other variables in ALL_CAPS at the top of the file, you can modify various hyperparameters used by the agent during training.  After training, this script will store the final actor and critic weights in the `model_weights` directory. It will also store the average score per-episode as a csv in the `scores` directory.
 
 The `run_agent.py` python file at the project root contains the logic necessary to run the network in the environment.  You can run it with the command `python run_agent.py`. Once again, you will need to update the UDACITY_ENV_PATH variable to point to your version of the Unity environment before running this script.  By modifying the `TRAIN_MODE` variable to False, you can watch the agent as it runs.
+
+# Acknowledgements
+During completion of this project, I used several sources as references and inspiration for my implementation.  This does not include any direct code usage, but does include hyperparameter decisions. These sources are listed below:
+- [Shangtong Zhang's A2C implementation](https://github.com/ShangtongZhang/DeepRL)
+- [Alvaro Durán Tovar's continuous A2C implementation](https://medium.com/deeplearningmadeeasy/advantage-actor-critic-continuous-case-implementation-f55ce5da6b4c)
+- [Chris Yoon's "Understanding Actor Critic Methods and A2C" Medium Post](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
