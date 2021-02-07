@@ -47,3 +47,4 @@ During completion of this project, I used several sources as references and insp
 - [Shangtong Zhang's A2C implementation](https://github.com/ShangtongZhang/DeepRL)
 - [Alvaro Durán Tovar's continuous A2C implementation](https://medium.com/deeplearningmadeeasy/advantage-actor-critic-continuous-case-implementation-f55ce5da6b4c)
 - [Chris Yoon's "Understanding Actor Critic Methods and A2C" Medium Post](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
+- [*Continuous control with deep reinforcement learning* by Lillicrap et al.](https://arxiv.org/abs/1509.02971v6)
