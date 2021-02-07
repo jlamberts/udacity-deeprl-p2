@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Continuous Control Stuff
+Reacher_Linux_NoVis.zip
+Reacher_Windows_x86_64.zip
+Reacher.exe
+.vscode/settings.json
+Reacher*
+.vscode
